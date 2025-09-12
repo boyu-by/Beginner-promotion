@@ -126,6 +126,53 @@ void free_list(Node *L)
     L->next=NULL;
 }
 
+Node *ReverseList(Node *L)
+{
+    Node * first =NULL;
+    Node * second=L->next;
+    Node * third;
+    while (second!=NULL)
+    {
+        third=second->next;
+        second->next=first;
+        first=second;
+        second=third;
+    }
+    Node *head=Initlist();
+    head->next=first;
+    return head;
+}
+
+int *delmiddleNode(Node *L)
+{
+    Node *fast=L->next;
+    Node* slow=L;
+    while (fast!=NULL&&fast->next!=NULL)
+    {
+        fast=fast->next->next;
+        slow=slow->next;
+    }
+    Node *mid=slow->next;
+    slow->next=mid->next;
+    free(mid);
+    return 1;
+} 
+
+int is_circle(Node*L)
+{
+    Node *fast=L;
+    Node *slow=L;
+    while (fast!=NULL&&fast->next!=NULL)
+    {
+        fast=fast->next->next;
+        slow=slow->next;
+        if (fast==slow)
+        {
+            return 1;
+        }
+        return 0;
+    }
+}
 
 int main ()
 {
